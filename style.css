@@ -3,6 +3,9 @@
 	--text-clr: #1e1b18;
 	--btn-clr: #6cc551;
 	--card-bg: #f7f7f9;
+	--default-font-stack:
+		system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+		Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 /*CSS Reset*/
@@ -25,6 +28,7 @@
 }
 
 body {
+	font-family: "Roboto", var(--default-font-stack);
 	line-height: 1.3;
 
 	-webkit-font-smoothing: antialiased;
