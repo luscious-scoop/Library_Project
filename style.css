@@ -1,3 +1,10 @@
+:root {
+	--header-bg-clr: #fffaff;
+	--text-clr: #1e1b18;
+	--btn-clr: #6cc551;
+	--card-bg: #f7f7f9;
+}
+
 /*CSS Reset*/
 
 *,
