@@ -18,7 +18,19 @@
 			<h1>Library</h1>
 			<button id="dialog-open-btn">+Add</button>
 		</header>
-
+		<dialog id="my-dialog">
+			<form>
+				<div class="inputs">
+					<input type="text" placeholder="Title" />
+					<input type="text" placeholder="Author" />
+					<input type="number" placeholder="Pages" />
+				</div>
+				<div class="form-btn">
+					<button id="save-btn">Save</button>
+					<button id="cancel-btn" formmethod="dialog">Cancel</button>
+				</div>
+			</form>
+		</dialog>
 		<div class="cards-container">
 			<div class="card">
 				<div class="title">
