@@ -171,7 +171,7 @@ header button:hover {
 	margin-bottom: 5px;
 }
 
-form > * {
+form > *:not(.checkbox) {
 	padding: 20px 16px;
 	display: flex;
 	flex-direction: column;
@@ -186,7 +186,7 @@ form input {
 }
 
 form input:focus {
-	background-color: hsla(0, 4%, 72%, 0.87);
+	background-color: #ffeedd;
 	outline: none;
 }
 form button {
@@ -194,6 +194,7 @@ form button {
 	color: white;
 	border-radius: 8px;
 	cursor: pointer;
+	border: none;
 }
 form #save-btn {
 	background-color: var(--btn-clr);
@@ -206,4 +207,15 @@ form #cancel-btn {
 dialog {
 	border: none;
 	border-radius: 12px;
+}
+
+::backdrop {
+	background-color: black;
+	opacity: 0.5;
+}
+
+form .checkbox {
+	display: grid;
+	grid-template-columns: 50% 20%;
+	justify-content: center;
 }

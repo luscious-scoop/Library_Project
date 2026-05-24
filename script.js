@@ -11,3 +11,9 @@ const removeBtn = document.querySelector("#remove-btn");
 dialogOpenBtn.addEventListener("click", () => {
 	dialog.showModal();
 });
+
+let library = [];
+
+function Book() {}
+
+function addBookToLibrary() {}
