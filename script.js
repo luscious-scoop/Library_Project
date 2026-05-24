@@ -9,6 +9,7 @@ const statusBtn = document.querySelector("#status-btn");
 const removeBtn = document.querySelector("#remove-btn");
 const checkInput = document.querySelector("#check-input");
 const myForm = document.querySelector("form");
+const cardsContainer = document.querySelector(".cards-container");
 
 dialogOpenBtn.addEventListener("click", () => {
 	dialog.showModal();
@@ -28,7 +29,7 @@ function addBookToLibrary() {
 	let title = titleInput.value;
 	let author = authorInput.value;
 	let pages = pagesInput.value;
-	let status = checkInput.checked ? "read" : "not read";
+	let statusBook = checkInput.checked ? "Read" : "Not read";
 	let flag = false;
 	for (let i = 0; i < library.length; i++) {
 		if (title === library[i].title) {
@@ -43,11 +44,12 @@ function addBookToLibrary() {
 		if (title === "" || author === "" || pages === "") {
 			alert("fields cannot be empty");
 		} else {
-			let newBook = new Book(title, author, pages, status);
+			let newBook = new Book(title, author, pages, statusBook);
 			library.push(newBook);
 			dialog.close();
 			console.log(library);
 			myForm.reset();
+			renderCards();
 		}
 	}
 }
@@ -57,9 +59,62 @@ saveBtn.addEventListener("click", (e) => {
 	addBookToLibrary();
 });
 
-function displayBooks() {}
-
 cancelBtn.addEventListener("click", () => {
 	dialog.close();
 	myForm.reset();
 });
+
+function renderCards() {
+	if (library.length === 0) {
+		return;
+	}
+	for (let i = 0; i < library.length; i++) {
+		let card = document.createElement("div");
+		card.classList.add("card");
+		let titleSection = document.createElement("div");
+		titleSection.classList.add("title");
+		let heading = document.createElement("h2");
+		let paragraph = document.createElement("p");
+		heading.textContent = "Title";
+		paragraph.textContent = library[i].title;
+		titleSection.appendChild(heading);
+		titleSection.appendChild(paragraph);
+		card.appendChild(titleSection);
+
+		let authorSection = document.createElement("div");
+		authorSection.classList.add("author");
+		let heading2 = document.createElement("h2");
+		let paragraph2 = document.createElement("p");
+		heading2.textContent = "Author";
+		paragraph2.textContent = library[i].author;
+		authorSection.appendChild(heading2);
+		authorSection.appendChild(paragraph2);
+		card.appendChild(authorSection);
+
+		let pagesSection = document.createElement("div");
+		pagesSection.classList.add("pages");
+		let heading3 = document.createElement("h2");
+		let paragraph3 = document.createElement("p");
+		heading3.textContent = "Pages read";
+		paragraph3.textContent = library[i].pages;
+		pagesSection.appendChild(heading3);
+		pagesSection.appendChild(paragraph3);
+		card.appendChild(pagesSection);
+
+		let buttonSection = document.createElement("div");
+		buttonSection.classList.add("card-button");
+		let button1 = document.createElement("button");
+		button1.classList.add("status-btn");
+		button1.textContent = library[i].status;
+
+		let button2 = document.createElement("button");
+		button2.textContent = "Remove";
+		button2.classList.add("remove-btn");
+		button2.setAttribute("data-id", `${library[i].id}`);
+		buttonSection.appendChild(button1);
+		buttonSection.appendChild(button2);
+		card.appendChild(buttonSection);
+
+		cardsContainer.appendChild(card);
+	}
+}
