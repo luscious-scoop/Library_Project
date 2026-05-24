@@ -8,6 +8,7 @@ const cancelBtn = document.querySelector("#cancel-btn");
 const statusBtn = document.querySelector("#status-btn");
 const removeBtn = document.querySelector("#remove-btn");
 const checkInput = document.querySelector("#check-input");
+const myForm = document.querySelector("form");
 
 dialogOpenBtn.addEventListener("click", () => {
 	dialog.showModal();
@@ -39,8 +40,15 @@ function addBookToLibrary() {
 	if (flag === true) {
 		alert("this book already exists");
 	} else {
-		let newBook = new Book(title, author, pages, status);
-		library.push(newBook);
+		if (title === "" || author === "" || pages === "") {
+			alert("fields cannot be empty");
+		} else {
+			let newBook = new Book(title, author, pages, status);
+			library.push(newBook);
+			dialog.close();
+			console.log(library);
+			myForm.reset();
+		}
 	}
 }
 
@@ -50,3 +58,8 @@ saveBtn.addEventListener("click", (e) => {
 });
 
 function displayBooks() {}
+
+cancelBtn.addEventListener("click", () => {
+	dialog.close();
+	myForm.reset();
+});

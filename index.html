@@ -18,7 +18,7 @@
 			<h1>Library</h1>
 			<button id="dialog-open-btn">+Add</button>
 		</header>
-		<dialog id="my-dialog">
+		<dialog id="my-dialog" autofocus="none">
 			<form>
 				<div class="inputs">
 					<input
@@ -45,8 +45,12 @@
 					<input type="checkbox" value="read" id="check-input" />
 				</div>
 				<div class="form-btn">
-					<button id="save-btn">Save</button>
-					<button id="cancel-btn" formmethod="dialog">Cancel</button>
+					<button id="save-btn" formnovalidate="validate">
+						Save
+					</button>
+					<button id="cancel-btn" formmethod="dialog" formnovalidate>
+						Cancel
+					</button>
 				</div>
 			</form>
 		</dialog>
