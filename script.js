@@ -184,3 +184,4 @@ Book.prototype.changeStatus = function () {
 		});
 	});
 };
+//merge
