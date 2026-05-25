@@ -219,3 +219,8 @@ form .checkbox {
 	grid-template-columns: 50% 20%;
 	justify-content: center;
 }
+
+.card .card-button .status-not-read {
+	background-color: #ff686b;
+	color: white;
+}

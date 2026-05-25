@@ -119,6 +119,7 @@ function renderCards(array = library) {
 		cardsContainer.appendChild(card);
 	}
 	removeCardEvent();
+	statusEvent();
 }
 
 function removeCards(id) {
@@ -145,6 +146,23 @@ function removeCardEvent() {
 	document.querySelectorAll(".remove-btn").forEach((button) => {
 		button.addEventListener("click", () => {
 			removeCards(button.dataset.id);
+		});
+	});
+}
+
+function statusEvent() {
+	const statusBtns = document.querySelectorAll(".status-btn");
+	statusBtns.forEach((button) => {
+		button.addEventListener("click", () => {
+			if (button.textContent === "Read") {
+				button.classList.remove(".status-btn");
+				button.textContent = "Not read";
+				button.classList.add("status-not-read");
+			} else {
+				button.textContent = "Read";
+				button.classList.remove("status-not-read");
+				button.classList.add("status-btn");
+			}
 		});
 	});
 }
