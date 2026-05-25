@@ -105,8 +105,11 @@ function renderCards(array = library) {
 		let buttonSection = document.createElement("div");
 		buttonSection.classList.add("card-button");
 		let button1 = document.createElement("button");
-		button1.classList.add("status-btn");
+		button1.classList.add("status-btns");
 		button1.textContent = library[i].status;
+		let button1Class =
+			button1.textContent === "Read" ? "status-btn" : "status-not-read";
+		button1.classList.add(button1Class);
 
 		let button2 = document.createElement("button");
 		button2.textContent = "Remove";
@@ -118,6 +121,7 @@ function renderCards(array = library) {
 
 		cardsContainer.appendChild(card);
 	}
+	console.log(library);
 	removeCardEvent();
 	statusEvent();
 }
@@ -151,17 +155,17 @@ function removeCardEvent() {
 }
 
 function statusEvent() {
-	const statusBtns = document.querySelectorAll(".status-btn");
+	const statusBtns = document.querySelectorAll(".status-btns");
 	statusBtns.forEach((button) => {
 		button.addEventListener("click", () => {
 			if (button.textContent === "Read") {
-				button.classList.remove(".status-btn");
 				button.textContent = "Not read";
 				button.classList.add("status-not-read");
+				button.classList.remove("status-btn");
 			} else {
 				button.textContent = "Read";
-				button.classList.remove("status-not-read");
 				button.classList.add("status-btn");
+				button.classList.remove("status-not-read");
 			}
 		});
 	});
