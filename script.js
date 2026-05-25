@@ -110,6 +110,7 @@ function renderCards(array = library) {
 		let button1Class =
 			button1.textContent === "Read" ? "status-btn" : "status-not-read";
 		button1.classList.add(button1Class);
+		button1.setAttribute("data-id", `${library[i].id}`);
 
 		let button2 = document.createElement("button");
 		button2.textContent = "Remove";
@@ -126,7 +127,7 @@ function renderCards(array = library) {
 	statusEvent();
 }
 
-function removeCards(id) {
+function filterCards(id) {
 	let flag = false;
 	let index = -1;
 
@@ -139,9 +140,13 @@ function removeCards(id) {
 			flag = false;
 		}
 	}
+	return [flag, index];
+}
+function removeCards(removeId) {
+	const [flag, index] = filterCards(removeId);
 	if (flag && index !== -1) {
 		library.splice(index, 1);
-		let removeCard = document.querySelector(`[data-id="${id}"]`)
+		let removeCard = document.querySelector(`[data-id="${removeId}"]`)
 			.parentElement.parentElement;
 		cardsContainer.removeChild(removeCard);
 	}
@@ -158,14 +163,26 @@ function statusEvent() {
 	const statusBtns = document.querySelectorAll(".status-btns");
 	statusBtns.forEach((button) => {
 		button.addEventListener("click", () => {
+			let flag = false;
+			let index = -1;
 			if (button.textContent === "Read") {
 				button.textContent = "Not read";
 				button.classList.add("status-not-read");
 				button.classList.remove("status-btn");
+				[flag, index] = filterCards(button.dataset.id);
+				if (flag && index !== -1) {
+					library[index].status = "Not read";
+					console.log(library);
+				}
 			} else {
 				button.textContent = "Read";
 				button.classList.add("status-btn");
 				button.classList.remove("status-not-read");
+				[flag, index] = filterCards(button.dataset.id);
+				if (flag && index !== -1) {
+					library[index].status = "Read";
+					console.log(library);
+				}
 			}
 		});
 	});
