@@ -86,10 +86,9 @@ h6 {
 /*CSS Reset End */
 
 header {
-	height: 120px;
 	align-items: center;
 	display: flex;
-	padding: 0px 20px;
+	padding: 1rem 3rem;
 
 	background-color: var(--header-bg-clr);
 }
