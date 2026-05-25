@@ -64,11 +64,12 @@ cancelBtn.addEventListener("click", () => {
 	myForm.reset();
 });
 
-function renderCards() {
-	if (library.length === 0) {
+function renderCards(array = library) {
+	if (array.length === 0) {
 		return;
 	}
-	for (let i = 0; i < library.length; i++) {
+	cardsContainer.textContent = "";
+	for (let i = 0; i < array.length; i++) {
 		let card = document.createElement("div");
 		card.classList.add("card");
 		let titleSection = document.createElement("div");
@@ -117,4 +118,33 @@ function renderCards() {
 
 		cardsContainer.appendChild(card);
 	}
+	removeCardEvent();
+}
+
+function removeCards(id) {
+	let flag = false;
+	let index = -1;
+
+	for (let i = 0; i < library.length; i++) {
+		if (library[i].id === id) {
+			flag = true;
+			index = i;
+			break;
+		} else {
+			flag = false;
+		}
+	}
+	if (flag && index !== -1) {
+		library.splice(index, 1);
+		let removeCard = document.querySelector(`[data-id="${id}"]`)
+			.parentElement.parentElement;
+		cardsContainer.removeChild(removeCard);
+	}
+}
+function removeCardEvent() {
+	document.querySelectorAll(".remove-btn").forEach((button) => {
+		button.addEventListener("click", () => {
+			removeCards(button.dataset.id);
+		});
+	});
 }
