@@ -124,10 +124,7 @@ function renderCards(array = library) {
 	}
 	console.log(library);
 	removeCardEvent();
-	/* statusEvent(); */
-	library.forEach((book) => {
-		book.changeStatus();
-	});
+	statusEvent();
 }
 
 function filterCards(id) {
@@ -161,7 +158,8 @@ function removeCardEvent() {
 		});
 	});
 }
-Book.prototype.changeStatus = function () {
+
+function statusEvent() {
 	const statusBtns = document.querySelectorAll(".status-btns");
 	statusBtns.forEach((button) => {
 		button.addEventListener("click", () => {
@@ -172,16 +170,20 @@ Book.prototype.changeStatus = function () {
 				button.classList.add("status-not-read");
 				button.classList.remove("status-btn");
 				[flag, index] = filterCards(button.dataset.id);
-				this.status = button.textContent;
-				console.log(library);
+				if (flag && index !== -1) {
+					library[index].status = "Not read";
+					console.log(library);
+				}
 			} else {
 				button.textContent = "Read";
 				button.classList.add("status-btn");
 				button.classList.remove("status-not-read");
-				this.status = button.textContent;
-				console.log(library);
+				[flag, index] = filterCards(button.dataset.id);
+				if (flag && index !== -1) {
+					library[index].status = "Read";
+					console.log(library);
+				}
 			}
 		});
 	});
-};
-//merge
+}
