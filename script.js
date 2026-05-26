@@ -176,13 +176,13 @@ function statusEvent() {
 			}
 			[flag, index] = filterCards(button.dataset.id);
 			if (flag && index !== -1) {
-				library[index].statusChange();
+				library[index].toggleReadStatus();
 				console.log(library);
 			}
 		});
 	});
 }
 
-Book.prototype.statusChange = function () {
+Book.prototype.toggleReadStatus = function () {
 	this.status = !this.status;
 };
