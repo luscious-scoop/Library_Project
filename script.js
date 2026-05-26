@@ -29,10 +29,10 @@ function addBookToLibrary() {
 	let title = titleInput.value;
 	let author = authorInput.value;
 	let pages = pagesInput.value;
-	let statusBook = checkInput.checked ? "Read" : "Not read";
+	let statusBook = checkInput.checked ? true : false;
 	let flag = false;
 	for (let i = 0; i < library.length; i++) {
-		if (title === library[i].title) {
+		if (title.toLowerCase() === library[i].title.toLowerCase()) {
 			flag = true;
 		} else {
 			flag = false;
@@ -106,7 +106,7 @@ function renderCards(array = library) {
 		buttonSection.classList.add("card-button");
 		let button1 = document.createElement("button");
 		button1.classList.add("status-btns");
-		button1.textContent = library[i].status;
+		button1.textContent = library[i].status === true ? "Read" : "Not read";
 		let button1Class =
 			button1.textContent === "Read" ? "status-btn" : "status-not-read";
 		button1.classList.add(button1Class);
@@ -169,7 +169,6 @@ function statusEvent() {
 				button.textContent = "Not read";
 				button.classList.add("status-not-read");
 				button.classList.remove("status-btn");
-				[flag, index] = filterCards(button.dataset.id);
 			} else {
 				button.textContent = "Read";
 				button.classList.add("status-btn");
@@ -177,13 +176,13 @@ function statusEvent() {
 			}
 			[flag, index] = filterCards(button.dataset.id);
 			if (flag && index !== -1) {
-				library[index].statusChange(button.textContent);
+				library[index].statusChange();
 				console.log(library);
 			}
 		});
 	});
 }
 
-Book.prototype.statusChange = function (text) {
-	this.status = text;
+Book.prototype.statusChange = function () {
+	this.status = !this.status;
 };
