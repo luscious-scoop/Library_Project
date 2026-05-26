@@ -215,7 +215,7 @@ dialog {
 
 form .checkbox {
 	display: grid;
-	grid-template-columns: 50% 20%;
+	grid-template-columns: 60% min(40px, 20%);
 	justify-content: center;
 }
 
