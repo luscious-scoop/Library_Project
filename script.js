@@ -170,20 +170,20 @@ function statusEvent() {
 				button.classList.add("status-not-read");
 				button.classList.remove("status-btn");
 				[flag, index] = filterCards(button.dataset.id);
-				if (flag && index !== -1) {
-					library[index].status = "Not read";
-					console.log(library);
-				}
 			} else {
 				button.textContent = "Read";
 				button.classList.add("status-btn");
 				button.classList.remove("status-not-read");
-				[flag, index] = filterCards(button.dataset.id);
-				if (flag && index !== -1) {
-					library[index].status = "Read";
-					console.log(library);
-				}
+			}
+			[flag, index] = filterCards(button.dataset.id);
+			if (flag && index !== -1) {
+				library[index].statusChange(button.textContent);
+				console.log(library);
 			}
 		});
 	});
 }
+
+Book.prototype.statusChange = function (text) {
+	this.status = text;
+};
